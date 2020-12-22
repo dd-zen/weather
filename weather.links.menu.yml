@@ -1,0 +1,6 @@
+weather.settings.form:
+  title: 'Weather settings'
+  route_name: weather.settings.form
+  parent: system.admin_config_services
+  description: 'Weather module configuration.'
+  weigth: 1

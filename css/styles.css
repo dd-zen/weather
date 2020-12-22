@@ -1,0 +1,22 @@
+.weather {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.weather .location {
+  color: #08D;
+}
+
+.weather .info {
+  display: flex;
+  align-items: center;
+}
+
+.weather .info .info__temp {
+  padding: 15px;
+  background-color: #b7ebff;
+  font-weight: bold;
+}
+
+.weather--metric .temp:after {
+  content: '\2103';
+}

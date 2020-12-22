@@ -1,0 +1,8 @@
+name: 'Weather'
+type: module
+description: 'Provides functionality for viewing current weather'
+package: Web services
+version: VERSION
+core: 8.x
+core_version_requirement: ^8 || ^9
+configure: weather.settings.form

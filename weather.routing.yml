@@ -1,0 +1,23 @@
+weather.default.page:
+  path: '/weather'
+  defaults:
+    _title: 'Weather'
+    _controller: 'Drupal\weather\Controller\WeatherController::weatherDefaultPage'
+  requirements:
+    _custom_access: 'Drupal\weather\Controller\WeatherController::weatherDefaultPageAccess'
+
+weather.custom.page:
+  path: '/weather/{city}'
+  defaults:
+    _title: 'Weather'
+    _controller: 'Drupal\weather\Controller\WeatherController::weatherByCityPage'
+  requirements:
+    _custom_access: 'Drupal\weather\Controller\WeatherController::weatherByCityPageAccess'
+
+weather.settings.form:
+  path: '/admin/config/services/weather'
+  defaults:
+    _form: 'Drupal\weather\Form\WeatherSettingsForm'
+    _title: 'Weather settings'
+  requirements:
+    _permission: 'administer weather module'

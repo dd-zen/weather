@@ -1,0 +1,92 @@
+{#
+/**
+ * @file
+ * Default theme implementation for displaying a weather.
+ *
+ * Available variables:
+ * - base: The base of weather checking.
+ * - clouds: The Cloudiness.
+ *   - all: Cloudiness, %.
+ * - city: The weather city.
+ * - coord: The city coordinates.
+ *   - long: Longitude.
+ *   - lat: Latitude.
+ * - date: The date of weather.
+ * - temperature: The temperature.
+ *   - temp: The current temperature.
+ *   - feels_like: The feels like temperature.
+ *   - temp_min: The minimum temperature.
+ *   - temp_max: The maximum temperature.
+ * - sys: The system info of the weather.
+ *   - type: Internal parameter.
+ *   - id:  Internal parameter.
+ *   - country: Country code (GB, JP etc.).
+ *   - sunrise: Sunrise time, UTC.
+ *   - sunset: Sunset time, UTC.
+ * - timezone: The timezone.
+ * - units: The weather units.
+ * - visibility: The visibility meters.
+ * - wind: The weather wind.
+ *   - speed: The speed of the wind.
+ *   - deg: The angle of the wind..
+ * - weather: The main weather description.
+ *   - icon_url: The weather icon url.
+ *   - main: The weather information.
+ *   - description: The weather description.
+ *
+ * @see template_preprocess_weather()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{%
+  set classes = [
+    'weather',
+    'weather--' ~ units|clean_class
+  ]
+%}
+
+<div {{ attributes.addClass(classes) }} >
+  <div class="location">
+    <span>{{ '@city, @country_code' | t({'@city': city, '@country_code': sys.country}) }}</span>
+  </div>
+  <div class="date">
+    <span>{{ date }}</span>
+  </div>
+  <div class="info">
+    <div class="info__temp">
+      <span class="temp temp--main">{{ temperature.temp }}</span>
+    </div>
+    <div class="info__icon">
+      <img src="{{ weather.icon_url }}" alt="{{ weather.main }}">
+    </div>
+    <div class="info__description">
+      <span>{{ weather.description }}</span>
+    </div>
+  </div>
+  <div class="temp-range">
+    <span class="temp temp--min">{{ 'Min: @temp_min' | t({'@temp_min' : temperature.temp_min}) }}</span>
+    <span class="temp temp--max">{{ 'Max: @temp_max' | t({'@temp_max' : temperature.temp_max}) }}</span class="temp temp--max">
+  </div>
+  <div class="additional-info">
+    <div class="additional-info__feels-like">
+      <span class="temp temp--feels-like">{{ 'Feels like: @temp_feels' | t({'@temp_feels': temperature.feels_like}) }}</span>
+    </div>
+    <div class="additional-info__pressure">
+      <span>{{ 'Pressure: @pressure' | t({'@pressure': temperature.pressure}) }}</span>
+    </div>
+    <div class="additional-info__cloudiness">
+      <span>{{ 'Cloudiness: @clouds%' | t({'@clouds': clouds.all}) }}</span>
+    </div>
+    <div class="additional-info__humidity">
+      <span>{{ 'Humidity: @humidity%' | t({'@humidity': temperature.humidity}) }}</span>
+    </div>
+    <div class="additional-info__sunrise">
+      <span>{{ 'Sunrise: @sunrise' | t({'@sunrise': sys.sunrise}) }}</span>
+    </div>
+    <div class="additional-info__sunset">
+      <span>{{ 'Sunset: @sunset' | t({'@sunset': sys.sunset}) }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Weather module.
+ */
+
+/**
+ * The Open Weather map icon URL path.
+ */
+const OPENWEATHERMAP_ICON = 'https://openweathermap.org/img/wn/ICON_CODE@2x.png';
+
+/**
+ * Implements hook_theme().
+ */
+function weather_theme($existing, $type, $theme, $path) {
+  return [
+    'weather' => [
+      'variables' => [
+        'base' => '',
+        'clouds' => [],
+        'coord' => [],
+        'city' => '',
+        'date' => '',
+        'date_format' => '',
+        'temperature' => [],
+        'sys' => [],
+        'timezone' => '',
+        'units' => '',
+        'visibility' => '',
+        'wind' => [],
+        'weather' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for weather templates.
+ *
+ * Default template: weather.html.twig.
+ */
+function template_preprocess_weather(&$variables) {
+  // Change the first letter of the sentence to the upper case.
+  $variables['weather']['description'] = ucfirst($variables['weather']['description']);
+  // Replace the token to the actual icon code.
+  $variables['weather']['icon_url'] = str_replace('ICON_CODE', $variables['weather']['icon'],OPENWEATHERMAP_ICON);
+  // Convert unix timestamps into human readable dates.
+  $variables['date'] = date($variables['date_format'], $variables['date']);
+  $variables['sys']['sunrise'] = date($variables['date_format'], $variables['sys']['sunrise']);
+  $variables['sys']['sunset'] = date($variables['date_format'], $variables['sys']['sunset']);
+
+  // Attach library.
+  $variables['#attached']['library'][] = 'weather/weather';
+}

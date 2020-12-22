@@ -1,0 +1,7 @@
+access weather page:
+  title: 'Access weather page'
+  description: 'Allows user to view the weather page'
+
+administer weather module:
+  title: 'Administer weather module'
+  description: 'Allows users to administer weather module'

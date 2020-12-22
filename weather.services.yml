@@ -1,0 +1,4 @@
+services:
+  openweathermap:
+    class: 'Drupal\weather\OpenWeatherMap'
+    arguments: ['@config.factory', '@http_client']
