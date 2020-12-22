@@ -104,7 +104,7 @@ class WeatherController extends ControllerBase {
    * @return array
    *   The render array.
    */
-  public function weatherByCityPage($city) {
+  public function weatherByCityPage(string $city) {
     $weather = $this->openWeatherMap->getWeather([
       'city' => $city,
     ]);
